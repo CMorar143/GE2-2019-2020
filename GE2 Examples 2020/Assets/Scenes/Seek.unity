@@ -451,9 +451,11 @@ MonoBehaviour:
   maxSpeed: 5
   maxForce: 10
   speed: 0
-  seekEnabled: 0
+  seekEnabled: 1
   target: {x: 0, y: 0, z: 10}
-  targetTransform: {fileID: 1264469901}
+  targetTransform: {fileID: 886447997}
+  waypoints: []
+  numwaypoints: 5
   arriveEnabled: 0
   slowingDistance: 10
   banking: 0.1

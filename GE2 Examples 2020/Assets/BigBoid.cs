@@ -18,6 +18,9 @@ public class BigBoid : MonoBehaviour
     public bool seekEnabled = false;
     public Vector3 target;
     public Transform targetTransform;
+    public List<Vector3> waypoints;
+    public int numwaypoints = 5;
+    private int current = 0;
 
     public bool arriveEnabled = false;
     public float slowingDistance = 10;
@@ -51,7 +54,7 @@ public class BigBoid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        waypoints = targetTransform.GetComponent<Path>().waypoints;
     }
 
     public void OnDrawGizmos()
@@ -113,8 +116,13 @@ public class BigBoid : MonoBehaviour
     {
         if (targetTransform != null)
         {
-            target = targetTransform.position;
+            target = waypoints[current];
+            if ((target - transform.position).magnitude < 1)
+            {
+                current = (current + 1) % waypoints.Count;
+            }
         }
+
         force = CalculateForce();
         acceleration = force / mass;
         velocity += acceleration * Time.deltaTime;
@@ -127,8 +135,6 @@ public class BigBoid : MonoBehaviour
             transform.LookAt(transform.position + velocity, tempUp);
             //transform.forward = velocity;
             velocity -= (damping * velocity * Time.deltaTime);
-
-
         }
     }
 }

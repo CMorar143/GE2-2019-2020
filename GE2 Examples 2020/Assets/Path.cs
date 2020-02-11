@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Path : MonoBehaviour
 {
-    public List<Vector3> waypoints;
+    public List<Vector3> waypoints = new List<Vector3>();
     public bool isLooped = false;
 
     private void Awake()
@@ -27,7 +27,7 @@ public class Path : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        
+
         for (int i = 1; i < waypoints.Count; i++)
         {
             Gizmos.DrawSphere(waypoints[i], 0.5f);
