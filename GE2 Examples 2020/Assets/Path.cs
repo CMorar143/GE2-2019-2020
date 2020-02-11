@@ -15,6 +15,13 @@ public class Path : MonoBehaviour
         waypoints.Add(pos + new Vector3(4, 0, 4));
         waypoints.Add(pos + new Vector3(4, 0, -4));
         waypoints.Add(pos + new Vector3(-4, 0, -4));
+
+        for (int i = 1; i < waypoints.Count; i++)
+        {
+            GameObject gameObject = new GameObject("gameObject" + i);
+            gameObject.transform.position = waypoints[i];
+            gameObject.transform.parent = transform;
+        }
     }
 
     private void OnDrawGizmos()
