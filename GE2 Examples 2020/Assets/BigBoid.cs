@@ -114,12 +114,14 @@ public class BigBoid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (targetTransform != null)
+        target = waypoints[current];
+        if ((target - transform.position).magnitude < 1)
         {
-            target = waypoints[current];
-            if ((target - transform.position).magnitude < 1)
+            current = (current + 1) % waypoints.Count;
+
+            if (current == 0  && !targetTransform.GetComponent<Path>().isLooped)
             {
-                current = (current + 1) % waypoints.Count;
+                current = 1;
             }
         }
 
