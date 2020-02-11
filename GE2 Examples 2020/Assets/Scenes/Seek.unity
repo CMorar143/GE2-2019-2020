@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
-  isLooped: 0
+  isLooped: 1
 --- !u!4 &886447997
 Transform:
   m_ObjectHideFlags: 0

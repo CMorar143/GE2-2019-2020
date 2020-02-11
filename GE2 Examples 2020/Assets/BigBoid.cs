@@ -21,6 +21,7 @@ public class BigBoid : MonoBehaviour
     public List<Vector3> waypoints;
     public int numwaypoints = 5;
     private int current = 0;
+    private bool looped;
 
     public bool arriveEnabled = false;
     public float slowingDistance = 10;
@@ -55,10 +56,12 @@ public class BigBoid : MonoBehaviour
     void Start()
     {
         waypoints = targetTransform.GetComponent<Path>().waypoints;
+        looped = targetTransform.GetComponent<Path>().isLooped;
     }
 
     public void OnDrawGizmos()
     {
+        int startIndex;
 
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(target, 0.1f);
@@ -71,6 +74,31 @@ public class BigBoid : MonoBehaviour
 
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(targetTransform.position, slowingDistance);
+
+        Gizmos.color = Color.red;
+
+        if (looped)
+        {
+            startIndex = 0;
+        }
+
+        else
+        {
+            startIndex = 1;
+        }
+
+        for (int i = startIndex; i < waypoints.Count; i++)
+        {
+            if (i == waypoints.Count - 1)
+            {
+                Gizmos.DrawLine(waypoints[i], waypoints[startIndex]);
+            }
+
+            else
+            {
+                Gizmos.DrawLine(waypoints[i], waypoints[i + 1]);
+            }
+        }
     }
 
     Vector3 Arrive(Vector3 target)
@@ -119,7 +147,7 @@ public class BigBoid : MonoBehaviour
         {
             current = (current + 1) % waypoints.Count;
 
-            if (current == 0  && !targetTransform.GetComponent<Path>().isLooped)
+            if (current == 0  && !looped)
             {
                 current = 1;
             }
