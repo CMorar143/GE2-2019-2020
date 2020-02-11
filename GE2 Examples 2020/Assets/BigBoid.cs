@@ -121,6 +121,8 @@ public class BigBoid : MonoBehaviour
         return desired - velocity;
     }
 
+
+
     public Vector3 CalculateForce()
     {
         Vector3 force = Vector3.zero;
